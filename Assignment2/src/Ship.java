@@ -1,5 +1,7 @@
 import java.awt.Point;
-public class Ship {
+import java.util.Observable;
+
+public class Ship extends Observable{
 	int scale = 50;
 	int x_cor = 6;
 	int y_cor= 6;

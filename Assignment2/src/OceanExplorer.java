@@ -19,8 +19,8 @@ public class OceanExplorer extends Application{
 	final int dimensions = 10;
 	final int islandCount = 10;
 	final int scalingFactor = 50;
-	Image shipImage;
-	ImageView shipImageView;
+	Image shipImage, pirateshipImage;
+	ImageView shipImageView, pirateshipImageView;
 	OceanMap oceanMap;
 	Scene scene;
 	Ship ship;
@@ -85,6 +85,15 @@ private void LoadShipImage() {
 	shipImageView.setY(y_co * scale);
 	anchorPane.getChildren().add(shipImageView);
 	
+}
+
+private void loadpirateShipImage() {
+	// Load target image
+	Image pirateshipImage = new Image("\\pirateShip.png", 50, 50, true, true);
+	pirateshipImageView = new ImageView(pirateshipImage);
+	pirateshipImageView.setX(x_co * scale);
+	pirateshipImageView.setY(y_co * scale);
+	root.getChildren().add(pirateshipImageView);
 }
 
 }
