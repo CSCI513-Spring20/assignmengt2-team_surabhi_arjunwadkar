@@ -1,135 +1,52 @@
 import java.awt.Point;
-import java.util.Observer;
 import java.util.Observable;
-
-public class PirateShip {
-	public Point p_position = new Point();
-	public Point shipPosition = new Point();
-	public int[][] oceanGrid;
-	public enum OceanItems
-	{
-		OCEAN(0),
-		ISLAND(1),
-		SHIP(2),
-		PIRATE(3);
-		
-		public final int intValue;
-		OceanItems(int intValue)
-		{
-			this.intValue = intValue;
-		}
-		
-		public int getIntValue() { return intValue; }
-	}
-	
-	public PirateShip(int x, int y, int[][] oceanGrid) {
-		p_position.x = x;
-		p_position.y = y;
-		this.oceanGrid = oceanGrid;
-	}
-	
-	public Point getShipLocation()
-	{
-		System.out.println("px: " + p_position.x + " | py: " + p_position.y);
-		return p_position;
-	}
+import java.util.Observer;
 
 
-	public void update(Observable o, Object arg1) 
-	{
-		if (o instanceof Ship)
-		{
-			shipPosition = ((Ship)o).getShipLocation();
-			move();
-		}
-		
-	}
-	
-	public void move()
-	{
-		System.out.println("MOVING");
-		System.out.println("shipx: " + shipPosition.getLocation().x + " | shipy: " + shipPosition.getLocation().y);
-		System.out.println("pShipx: " + p_position.getLocation().x + " | pShipy: " + p_position.getLocation().y);
-		
-		if (Math.abs(shipPosition.getLocation().x - p_position.getLocation().x) >= Math.abs(shipPosition.getLocation().y - p_position.getLocation().y))
-		{
-			if (shipPosition.getLocation().x > p_position.getLocation().x) 
-			{
-					if ((oceanGrid[p_position.x+1][p_position.y] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x+1][p_position.y] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().x < oceanGrid.length-1) 
-					{
-						p_position.x = p_position.x + 1;
-					}					
-					else
-					{
-						if (shipPosition.getLocation().y > p_position.getLocation().y && (oceanGrid[p_position.x][p_position.y+1] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x][p_position.y+1] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().y < oceanGrid.length-1)
-						{
-							p_position.y = p_position.y + 1;
-						}
-						else if (shipPosition.getLocation().y < p_position.getLocation().y && (oceanGrid[p_position.x][p_position.y-1] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x][p_position.y-1] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().y > 0)
-						{
-							p_position.y = p_position.y - 1;
-						}
-					}
-					
-			}
-			else 
-			{
-				if ((oceanGrid[p_position.x-1][p_position.y] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x-1][p_position.y] == OceanItems.SHIP.getIntValue())) 
-				{
-					p_position.x = p_position.x - 1;
-				}
-				else
-				{
-					if (shipPosition.getLocation().y > p_position.getLocation().y && (oceanGrid[p_position.x][p_position.y+1] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x][p_position.y+1] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().y < oceanGrid.length-1)
-					{
-						p_position.y = p_position.y + 1;
-					}
-					else if (shipPosition.getLocation().y < p_position.getLocation().y && (oceanGrid[p_position.x][p_position.y-1] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x][p_position.y-1] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().y > 0)
-					{
-						p_position.y = p_position.y - 1;
-					}
-				}
-				
-			}
-		}
-		else
-		{
-			if (shipPosition.getLocation().y > p_position.getLocation().y && p_position.getLocation().y < oceanGrid.length-1) 
-			{
-				if (oceanGrid[p_position.x][p_position.y+1] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x][p_position.y+1] == OceanItems.SHIP.getIntValue()) 
-				{
-					p_position.y = p_position.y + 1;
-				}
-				else
-				{
-					if (shipPosition.getLocation().x > p_position.getLocation().x && (oceanGrid[p_position.x+1][p_position.y] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x+1][p_position.y] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().x < oceanGrid.length-1)
-					{
-						p_position.x = p_position.x + 1;
-					}
-					else if (shipPosition.getLocation().x < p_position.getLocation().x && (oceanGrid[p_position.x-1][p_position.y] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x-1][p_position.y] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().x > 0)
-					{
-						p_position.x = p_position.x - 1;
-					}
-				}
-			}
-			else 
-			{
-				if ((oceanGrid[p_position.x][p_position.y-1] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x][p_position.y-1] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().y > 0) 
-				{
-					p_position.y = p_position.y - 1;
-				}
-				else
-				{
-					if (shipPosition.getLocation().x > p_position.getLocation().x && (oceanGrid[p_position.x+1][p_position.y] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x+1][p_position.y] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().x < oceanGrid.length-1)
-					{
-						p_position.x = p_position.x + 1;
-					}
-					else if (shipPosition.getLocation().x < p_position.getLocation().x && (oceanGrid[p_position.x-1][p_position.y] == OceanItems.OCEAN.getIntValue() || oceanGrid[p_position.x-1][p_position.y] == OceanItems.SHIP.getIntValue()) && p_position.getLocation().x > 0)
-					{
-						p_position.x = p_position.x - 1;
-					}
-				}
-			}
-		}
-	}
+public class PirateShip implements Observer {
+    Point pirateship;
+    Point columbusShip;
+    int i,j ;
+    @Override
+    public void update(Observable Obs, Object arg) {
+
+        if(Obs instanceof Ship) {
+            columbusShip = ((Ship)Obs).getShipLocation();
+            move_pirate_ship();
+        }
+    }
+
+    public void setLocation (int x, int y) {
+        i=x/50;j=y/50;
+        OceanMap.grid[i][j]= true;
+
+        pirateship =new Point(x,y);
+
+
+    }
+
+    public void move_pirate_ship() {
+        if (i+1<10&&pirateship.x - columbusShip.x < 0) {
+            pirateship.x = pirateship.x + 50;
+
+        }
+        else if (i-1>-1&&pirateship.x - columbusShip.x > 0){
+            pirateship.x =pirateship.x - 50;
+
+        }
+
+        if (j+1<10&&pirateship.y - columbusShip.y < 0) {
+            pirateship.y = pirateship.y+ 50;
+
+        }
+        else if (j-1>-1&&pirateship.y - columbusShip.y > 0){
+            pirateship.y = pirateship.y-50;
+
+        }
+    }
+
+    public Point getShipLocation() {
+
+        return new Point(pirateship.x,pirateship.y);
+    }
 }
