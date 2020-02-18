@@ -1,67 +1,75 @@
 import java.awt.Point;
 import java.util.Observable;
+import java.util.Observer;
 
 public class Ship extends Observable{
 	int scale = 50;
-	int x_cor = 6;
-	int y_cor= 6;
 	Point currentLocation;
 	
-	
+	OceanMap oceanmap = new OceanMap();
+    int x_cord = oceanmap.getShipLocation().x;
+    int y_cord = oceanmap.getShipLocation().y;
 	public Point goEast(int x,int y) {
-		if(x_cor >= 450){
-            x_cor = x_cor;
-            y_cor = y_cor;
+		if(x_cord != 450){
+			x_cord = x + 50;
+            y_cord = y;
         }
         else{
-            x_cor = x + 50;
-            y_cor = y;
+        	x_cord = x_cord;
+            y_cord = y_cord;  
         }
-        return new Point (x_cor , y_cor);
+		setChanged();
+        notifyObservers();
+        return new Point (x_cord , y_cord);
 		
 	}
 	public Point goWest(int x,int y) {
-		if(x_cor <= 0){
-			x_cor = x_cor;
-			y_cor = y_cor;
+		if(x_cord != 0){
+			x_cord = x - 50;
+        	y_cord = y;
+			x_cord = x_cord;
+			y_cord = y_cord;
 
         }
         else{
-        	x_cor = x - 50;
-        	y_cor = y;
+			x_cord = x_cord;
+			y_cord = y_cord;
         }
-        return new Point(x_cor , y_cor);
+		setChanged();
+        notifyObservers();
+        return new Point(x_cord , y_cord);
 		
 		
 	}
 	public Point goNorth(int x,int y) {
-		if(y_cor <= 0){
-			x_cor = x_cor;
-            y_cor = y_cor;
+		if(y_cord != 0){
+			x_cord = x;
+            y_cord = y - 50;
         }
         else{
-        	x_cor = x;
-            y_cor = y - 50;
+        	x_cord = x_cord;
+			y_cord = y_cord;
         }
-        return new Point(x_cor , y_cor);
+		setChanged();
+        notifyObservers();
+        return new Point(x_cord , y_cord);
 		
 	}
 	public Point goSouth(int x,int y) {
-		if(y_cor >= 450){
-			x_cor = x_cor;
-            y_cor = y_cor;
-
+		if(y_cord != 450){
+			x_cord = x;
+            y_cord = y +50;
         }
         else{
-        	x_cor = x;
-            y_cor = y +50;
+        	x_cord = x_cord;
+            y_cord = y_cord;
         }
-        return new Point(x_cor , y_cor);
+        return new Point(x_cord , y_cord);
 		
 	}
 
 	public Point getShipLocation() {
 		
-		return new Point(x_cor,y_cor);
+		return new Point(x_cord,y_cord);
 	}
 }
