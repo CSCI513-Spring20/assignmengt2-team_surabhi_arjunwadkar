@@ -16,7 +16,7 @@ public class PirateShip implements Observer {
         }
     }
 
-    public void setLocation (int x, int y) {
+    public void setShipLocation (int x, int y) {
         i=x/50;j=y/50;
         OceanMap.grid[i][j]= true;
 
@@ -47,6 +47,6 @@ public class PirateShip implements Observer {
 
     public Point getShipLocation() {
 
-        return new Point(pirateship.x,pirateship.y);
+        return new Point(pirateship.x, pirateship.y);
     }
 }
