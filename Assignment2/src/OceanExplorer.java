@@ -19,8 +19,8 @@ public class OceanExplorer extends Application{
 	final int dimensions = 10;
 	final int islandCount = 10;
 	final int scalingFactor = 50;
-	Image shipImage, pirateshipImage;
-	ImageView shipImageView, pirateshipImageView;
+	Image shipImage, pirateshipImage, islandImage, pirateIslandImage;
+	ImageView shipImageView, pirateshipImageView, islandImageView, pirateIslandImageView;
 	OceanMap oceanMap;
 	Scene scene;
 	Ship ship;
@@ -36,7 +36,7 @@ public class OceanExplorer extends Application{
 	
 @Override
 public void start(Stage mapStage) throws Exception{
-		oceanMap Map = new oceanMap(dimensions,, islandCount);
+		oceanMap Map = new oceanMap(dimensions, islandCount);
 		islandMap = oceanMap.getMap();
 		root = new AnchorPane();
 		drawMap();
@@ -81,6 +81,7 @@ private void startSailing() {
 private void LoadShipImage() {
 	Image shipImage = new Image("\\ship.png",50,50,true,true);
 	shipImageView = new ImageView(shipImage);
+	Map.setLocation(x_co, y_co);
 	shipImageView.setX(x_co * scale);
 	shipImageView.setY(y_co * scale);
 	anchorPane.getChildren().add(shipImageView);
@@ -91,9 +92,28 @@ private void loadpirateShipImage() {
 	// Load target image
 	Image pirateshipImage = new Image("\\pirateShip.png", 50, 50, true, true);
 	pirateshipImageView = new ImageView(pirateshipImage);
+	Map.setLocation(x_co, y_co);
 	pirateshipImageView.setX(x_co * scale);
 	pirateshipImageView.setY(y_co * scale);
-	root.getChildren().add(pirateshipImageView);
+	anchorPane.getChildren().add(pirateshipImageView);
+}
+
+public void loadIsland() {
+	Image islandImage = new Image("island.jpg",50,50,true,true);
+	islandImageView = new ImageView(islandImage);
+    Map.setLocation(x_co, y_co);
+    islandImageView.setX(x_co * scale);
+    islandImageView.setY(y_co * scale);
+    anchorPane.getChildren().add(islandImageView);
+}
+
+public void loadPirateIsland() {
+	Image pirateIslandImage = new Image("pirateIsland.jpg",50,50,true,true);
+	pirateIslandImageView = new ImageView(pirateIslandImage);
+    Map.setLocation(x_co, y_co);
+    pirateIslandImageView.setX(x_co * scale);
+    pirateIslandImageView.setY(y_co * scale);
+    anchorPane.getChildren().add(pirateIslandImageView);
 }
 
 }
